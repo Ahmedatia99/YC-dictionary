@@ -2,7 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
     images: {
-        domains: ["t3.ftcdn.net"], // Add the external domain here
+        domains: ["t3.ftcdn.net" , "myglobalheart.org"],
+         // Add the external domain here
       },
 }
 
