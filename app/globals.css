@@ -8,7 +8,7 @@
   --font-mono: var(--font-geist-mono);
 
   --color-primary: #ee2b69;
-  --color-primary-100 :#FFE8F0;
+  --color-primary-100: #ffe8f0;
   --color-secondary: #fbe843;
 
   --color-black-100: #333333;
@@ -157,40 +157,34 @@
   /* startupcard */
   .startup-card {
     @apply bg-white border-[5px] border-black py-6 px-5 rounded-[22px] shadow-200 hover:border-primary transition-all duration-500 hover:shadow-300 hover:bg-primary-100;
-}
+  }
 
-.startup-card_date {
+  .startup-card_date {
     @apply font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-full group-hover:bg-white-100;
-}
+  }
 
-.startup-card_desc {
+  .startup-card_desc {
     @apply font-normal text-[16px] line-clamp-2 my-3 text-black-100 break-all;
-}
+  }
 
-.startup-card_img {
+  .startup-card_img {
     @apply w-full h-[164px] rounded-[10px] object-cover;
-}
+  }
 
-.startup-card_btn {
+  .startup-card_btn {
     @apply rounded-full bg-black-200 font-medium text-[16px] text-white px-5 py-3;
-}
+  }
 
-.startup-card_skeleton {
+  .startup-card_skeleton {
     @apply w-full h-96 rounded-[22px] bg-zinc-400;
-}
+  }
 }
 
 .w-md-editor-toolbar {
   padding: 10px !important;
 }
 .pattern {
-  background-image: linear-gradient(
-    to right,
-    transparent 49.5%,
-    rgba(251, 232, 67, 0.2) 49.5%,
-    rgba(251, 232, 67, 0.6) 50.5%,
-    transparent 50.5%
-  );
+  background-image: linear-gradient(to right, #0000 43.5%, #fbe84333 49.5%, #fbe84399 49.5%, #0000 50.5%);
   background-size: 5% 100%;
   background-position: center;
   background-repeat: repeat-x;
@@ -231,8 +225,6 @@
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
 } */
-
-
 
 /* @theme inline {
   --color-background: var(--background);
