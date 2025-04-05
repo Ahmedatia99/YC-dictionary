@@ -178,6 +178,17 @@
   .startup-card_skeleton {
     @apply w-full h-96 rounded-[22px] bg-zinc-400;
   }
+  .category-tag {
+    @apply font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-full;
+  }
+  /* view */
+  .view-container {
+    @apply flex justify-end items-center mt-5 fixed bottom-3 right-3;
+  }
+
+  .view-text {
+    @apply font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-lg capitalize;
+  }
 }
 
 .w-md-editor-toolbar {
