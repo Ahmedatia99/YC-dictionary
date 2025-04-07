@@ -52,7 +52,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
         <img
           src={post.image}
           alt="thumbnail"
-          className="w-full h-auto rounded-xl"
+          className="w-full max-h-[600px] rounded-xl aspect-auto mt-10"
         />
         <div className="space-y-5 mt-10 max-w-4xl mx-auto">
           <div className="flex-between gap-5">
@@ -65,7 +65,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
                 alt="thumbnail"
                 width={64}
                 height={64}
-                className="rounded-full drop-shadow-lg"
+                className="rounded-[100%] drop-shadow-lg aspect-square"
               />
               <div>
                 <p className="text-20-medium">{post.author?.name}</p>
