@@ -3,7 +3,7 @@
 // https://github.com/sanity-io/next-sanity#live-content-api for more information.
 import "server-only"
 import { defineLive } from "next-sanity";
-import { client } from './client'
+import { client } from '@/sanity/lib/client'
 
 export const { sanityFetch, SanityLive } = defineLive({ 
   client: client.withConfig({ 
