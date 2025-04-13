@@ -1,6 +1,5 @@
-import { defineQuery } from "next-sanity";
 
-export const STARTUP_QUERY = defineQuery(`*[ 
+export const STARTUP_QUERY = (`*[ 
   _type == "startup" && 
   defined(slug.current) && 
   (
@@ -23,7 +22,7 @@ export const STARTUP_QUERY = defineQuery(`*[
   image,
 }`);
 
-export const STARTUP_BY_ID_QUERY = defineQuery(`*[_type == "startup" && _id == $id][0]{
+export const STARTUP_BY_ID_QUERY = (`*[_type == "startup" && _id == $id][0]{
   _id,
   title,
   views,
@@ -39,7 +38,7 @@ export const STARTUP_BY_ID_QUERY = defineQuery(`*[_type == "startup" && _id == $
   pitch
 }`);
 
-export const STARTUP_VIEWS_QUERY = defineQuery(`*[
+export const STARTUP_VIEWS_QUERY = (`*[
   _type == "startup" && 
   _id == $id
 ][0]{
@@ -47,12 +46,13 @@ export const STARTUP_VIEWS_QUERY = defineQuery(`*[
   views
 }`);
 
-export const AUTHOR_BY_GITHUB_ID_QUERY = defineQuery(`*[_type == "author" && id == $id][0]{
-  id,
+export const AUTHOR_BY_GITHUB_ID_QUERY = (`*[_type == "author" && id == $id][0]{
   _id,
+  id,
   name,
   username,
   email,
   image,
-  bio
+  bio,
+  
 }`);

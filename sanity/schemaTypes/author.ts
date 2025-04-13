@@ -17,7 +17,7 @@ export const author = defineType({
       name: 'username',
       title: 'Username',
       type: 'string',
-      validation: (Rule) => Rule.required().regex(/^[a-z0-9_]+$/, {
+      validation: (Rule) => Rule.required().regex(/^[A-Za-z0-9_]+$/, {
         name: 'alphanumeric',
         invert: false,
       }).error('Username must be alphanumeric with underscores only'),
