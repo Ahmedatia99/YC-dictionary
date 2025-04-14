@@ -14,16 +14,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       try {
         const existingUser = await client.fetch(AUTHOR_BY_GITHUB_ID_QUERY, {id:profile?.id});
         if (!existingUser) {
-          await writeClient.create({
+          await writeClient.createIfNotExists({
             _type: "author",
-            _id: profile.id,
+            _id: `github-${profile.id}`,
+            githubId: profile.id,
             name: user?.name,
             username: profile?.login,
             email: user?.email,
             image: user?.image,
             bio: profile?.bio || "",
           });
+          return true;
         }
+          
         return true;
       } catch (error) {
         console.error("Error in signIn callback:", error);
@@ -39,7 +42,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           });
     
           if (user) {
-            token.id = user._id;
+            token.id = user._id;;
           }
     
           return token;

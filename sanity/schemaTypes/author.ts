@@ -14,6 +14,12 @@ export const author = defineType({
       validation: (Rule) => Rule.required().min(2).error('Name must be at least 2 characters'),
     }),
     defineField({
+      name: 'githubId',
+      title: 'GitHub ID',
+      type: 'number',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'username',
       title: 'Username',
       type: 'string',
