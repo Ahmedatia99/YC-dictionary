@@ -1,20 +1,62 @@
 "use client";
-import { useState } from "react";
+import { useState, useActionState } from "react";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import MDEditor from "@uiw/react-md-editor";
 import { Button } from "./ui/button";
 import { Send } from "lucide-react";
+import { formSchema } from "@/lib/validation";
+import { z } from "zod";
 
 const StartupForm = () => {
-  const [errors, setErrors] = useState({});
-  const [pitch, setPitch] = useState("**Hello world!!!**");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [pitch, setPitch] = useState("");
 
-  const isPending = false;
+  const handleFormSubmit = async (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    prevState: any,
+    formData: FormData
+  ) => {
+    try {
+      const formValues = {
+        title: formData.get("title") as string,
+        description: formData.get("description") as string,
+        category: formData.get("category") as string,
+        link: formData.get("link") as string,
+        pitch,
+      };
+
+      await formSchema.parseAsync(formValues);
+      console.log(formValues);
+
+     
+
+      // return result;
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const fieldErrors = error.flatten().fieldErrors;
+        setErrors(fieldErrors as unknown as Record<string, string>);
+        return { ...prevState, error: "Validation failed", status: "ERROR" };
+      }
+     
+      return {
+        ...prevState,
+        error: "An unexpected error has occurred",
+        status: "Error",
+      };
+    }
+  };
+
+  const [state, formAction, isPending] = useActionState(handleFormSubmit, {
+    error: "",
+    status: "INITIAL",
+    fieldErrors: {},
+  });
+
   return (
     <>
       <div>
-        <form action={() => {}} className="startup-form">
+        <form action={formAction} className="startup-form">
           <div>
             <label htmlFor="title" className="startup-form_label">
               Title
@@ -26,7 +68,6 @@ const StartupForm = () => {
               required
               placeholder="Startup Title"
             />
-
             {errors.title && (
               <p className="startup-form_error">{errors.title}</p>
             )}
@@ -43,7 +84,6 @@ const StartupForm = () => {
               required
               placeholder="Startup Description"
             />
-
             {errors.description && (
               <p className="startup-form_error">{errors.description}</p>
             )}
@@ -60,7 +100,6 @@ const StartupForm = () => {
               required
               placeholder="Startup Category (Tech, Health, Education...)"
             />
-
             {errors.category && (
               <p className="startup-form_error">{errors.category}</p>
             )}
@@ -76,7 +115,6 @@ const StartupForm = () => {
               required
               placeholder="Startup Image URL"
             />
-
             {errors.link && <p className="startup-form_error">{errors.link}</p>}
           </div>
           <div data-color-mode="light">
@@ -99,7 +137,6 @@ const StartupForm = () => {
                 disallowedElements: ["style"],
               }}
             />
-
             {errors.pitch && (
               <p className="startup-form_error">{errors.pitch}</p>
             )}
@@ -107,9 +144,10 @@ const StartupForm = () => {
           <Button
             className="startup-form_btn cursor-pointer text-white"
             disabled={isPending}
+            type="submit"
           >
             {isPending ? "Submitting..." : "  Submit Your Pitch"}
-            <Send className="ml-2 size-6" />
+            <Send className="ml-2" size={16} />
           </Button>
         </form>
       </div>
