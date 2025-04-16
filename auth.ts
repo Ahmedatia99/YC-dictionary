@@ -5,14 +5,19 @@ import { writeClient } from "@/sanity/lib/write-client";
 import { AUTHOR_BY_GITHUB_ID_QUERY } from "@/sanity/lib/queries";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [GitHub({
-    clientId: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  })],
+  providers: [
+    GitHub({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    }),
+  ],
   callbacks: {
     async signIn({ user, profile }) {
       try {
-        const existingUser = await client.fetch(AUTHOR_BY_GITHUB_ID_QUERY, {id:profile?.id});
+        const existingUser = await client.fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
+          id: profile?.id,
+        });
+
         if (!existingUser) {
           await writeClient.createIfNotExists({
             _type: "author",
@@ -24,9 +29,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             image: user?.image,
             bio: profile?.bio || "",
           });
-          return true;
         }
-          
+
         return true;
       } catch (error) {
         console.error("Error in signIn callback:", error);
@@ -38,26 +42,27 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (profile) {
         try {
           const user = await client.fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
-            id: profile.id, 
+            id: profile.id,
           });
-    
           if (user) {
-            token.id = user._id;;
+            token.id = user._id;
+            token.username = user.username;
           }
-    
-          return token;
         } catch (error) {
           console.error("Error in jwt callback:", error);
         }
       }
+
       return token;
     },
-    
+
     async session({ session, token }) {
-      if (token?.id) {
-        session.userId = token.id; 
+      if (session.user && token?.id) {
+        session.user.id = token.id; 
+        // session.user.username = token.username;
       }
+
       return session;
-    }
+    },
   },
 });
