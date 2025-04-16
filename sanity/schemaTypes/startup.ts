@@ -56,8 +56,7 @@ export const startup = defineType({
     defineField({
       name: 'pitch',
       title: 'Pitch',
-      type: 'array',
-      of: [{ type: 'block' }],
+      type: 'text',
       validation: (Rule) => Rule.required().error('Pitch is required'),
     }),
   ],
