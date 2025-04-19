@@ -3,6 +3,8 @@ import "./globals.css";
 import "easymde/dist/easymde.min.css";
 import localFont from "next/font/local";
 import { Toaster } from "@/components/ui/sonner";
+import '../sentry.client.config';
+import FeedbackButton from "@/components/FeedbackButton";
 
 const workSans = localFont({
   src: [
@@ -29,9 +31,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={workSans.className}>
+      <body className={`${workSans.className} relative`}>
         {children}
         <Toaster />
+        <div className="fixed right-2 bottom-2">
+          <FeedbackButton />
+        </div>
       </body>
     </html>
   );
