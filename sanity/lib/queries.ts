@@ -1,5 +1,4 @@
-
-export const STARTUP_QUERY = (`*[ 
+export const STARTUP_QUERY = `*[ 
   _type == "startup" && 
   defined(slug.current) && 
   (
@@ -20,9 +19,9 @@ export const STARTUP_QUERY = (`*[
   description,
   category,
   image,
-}`);
+}`;
 
-export const STARTUP_BY_ID_QUERY = (`*[_type == "startup" && _id == $id][0]{
+export const STARTUP_BY_ID_QUERY = `*[_type == "startup" && _id == $id][0]{
   _id,
   title,
   views,
@@ -36,17 +35,14 @@ export const STARTUP_BY_ID_QUERY = (`*[_type == "startup" && _id == $id][0]{
   category,
   image,
   pitch
-}`);
+}`;
 
-export const STARTUP_VIEWS_QUERY = (`*[
-  _type == "startup" && 
-  _id == $id
-][0]{
+export const STARTUP_VIEWS_QUERY = `*[_type == "startup" && _id == $id][0]{
   _id,
   views
-}`);
+}`;
 
-export const AUTHOR_BY_GITHUB_ID_QUERY = (`*[_type == "author" && githubId == $id][0]{
+export const AUTHOR_BY_GITHUB_ID_QUERY = `*[_type == "author" && githubId == $id][0]{
   _id,
   githubId,
   name,
@@ -54,4 +50,4 @@ export const AUTHOR_BY_GITHUB_ID_QUERY = (`*[_type == "author" && githubId == $i
   email,
   image,
   bio,
-}`);
+}`;
