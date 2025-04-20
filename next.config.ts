@@ -3,12 +3,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [ 'avatars.githubusercontent.com',
-      'lh3.googleusercontent.com',
-      'res.cloudinary.com',
-      'pbs.twimg.com',
-      'cdn.discordapp.com',
-      "portfolio-ahmed-atias-projects-647e742a.vercel.app"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
 };
 

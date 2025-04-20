@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { formatDate } from "@/lib/utils";
 import { EyeIcon } from "lucide-react";
 import Link from "next/link";
@@ -38,8 +39,8 @@ const StartUpCard = ({ post }: { post: StartupTypeCard }) => {
         </Link>
       </div>
       <Link href={`/startup/${post._Id}`}>
-        <p className="startup-card_des">{post.description}</p>
-        <Image src={post.image} alt="placeHold" className="startup-card_img" width={60} height={60}/>
+        <p className="startup-card_desc">{post.description}</p>
+        <img src={post.image} loading="lazy"  alt="post" className="startup-card_img" width={60} height={60}/>
       </Link>
       <div className="flex justify-between mt-5 gap-3">
         <Link href={`/${post.category}`} className="">
