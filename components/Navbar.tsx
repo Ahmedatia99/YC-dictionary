@@ -22,16 +22,16 @@ export default async function Navbar() {
               <form
                 action={async () => {
                   "use server";
-                  await signOut();
+                  await signOut({redirectTo : "/"});
                 }}
               >
-                <button type="submit" className="cursor-primary flex items-center">
+                <button type="submit" className="cursor-pointer flex items-center">
                 <span className="max-sm:hidden">Logout</span>
                 <LogOut className="size-6 sm:hidden text-red-500" />
                 </button>
               </form>
 
-              <Link href={`user/${session?.id}`}>
+              <Link href={`/user/${session?.user.id}`}>
                 <Image src={session?.user?.image || ""}
                   alt={session?.user?.name || ""}
                   width={40}
