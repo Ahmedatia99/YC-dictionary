@@ -11,19 +11,21 @@ import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Views from "@/components/Views";
 import { PLAYLIST_BY_SLUG_QUERY } from '@/sanity/lib/queries';
-import { StartupTypeCard } from '@/components/StartupCard';
-import StartUpCard from '@/components/StartupCard';
+import StartUpCard,{ StartupTypeCard } from '@/components/StartupCard';
 
 const Page = async ({ params }: { params: { id: string } }) => {
   const id = (await params).id;
 
-  const [post , {select : editorPosts}] = await Promise.all([
-     client.fetch(STARTUP_BY_ID_QUERY, { id }),
-     client.fetch(PLAYLIST_BY_SLUG_QUERY, { slug: "editor-picks-new" })
-  ])
- 
-  if (!post) return notFound();
-
+  // const [post, { select: editorPosts }] = await Promise.all([
+  //   client.fetch(STARTUP_BY_ID_QUERY, { id }),
+  //   client.fetch(PLAYLIST_BY_SLUG_QUERY, {
+  //     slug: "editor-picks-new",
+  //   }),
+  // ]); 
+  const post = await client.fetch(STARTUP_BY_ID_QUERY, { id })
+   if (!post) return notFound();
+  
+  // const editorPicks: StartupTypeCard[] = editorPosts?.select || [];
   return (
     <>
       <section className="pink_container pattern !min-h-[230px]">
@@ -70,16 +72,17 @@ const Page = async ({ params }: { params: { id: string } }) => {
           )}
           <hr className="divider" />
 
-          {editorPosts.length > 0 && (
-            <div className="max-w-4xl mx-auto">
-              <p className="text-30-semibold capitalize">editor picks</p>
-              <ul className="grid_card-sm mt-7">
-                {editorPosts.map((posts:StartupTypeCard , i:number)=>(
-                  <StartUpCard key={i} post={post} />
-                ))}
+          {/* {editorPosts?.length > 0 && (
+          <div className="max-w-4xl mx-auto">
+            <p className="text-30-semibold">Editor Picks</p>
+
+            <ul className="mt-7 card_grid-sm">
+              {editorPosts.map((post: StartupTypeCard, i: number) => (
+                <StartUpCard`` key={i} post={post} />
+              ))}
               </ul>
             </div>
-          )}
+          )} */}
 
         </div>
         <Suspense fallback={<Skeleton className="view_skeleton"></Skeleton>}>
