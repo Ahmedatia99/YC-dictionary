@@ -79,7 +79,7 @@ export const PLAYLIST_BY_SLUG_QUERY =
   _id,
   title,
   slug,
-  select[]->{
+  select[] -> {
     _id,
     _createdAt,
     title,
