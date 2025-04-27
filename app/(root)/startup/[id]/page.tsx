@@ -22,23 +22,14 @@ const Page = async ({ params }: { params: { id: string } }) => {
       slug: "editor-picks-new",
     }),
   ]);
-
+ 
   if (!post) return notFound();
   return (
     <>
       <section className="pink_container pattern !min-h-[230px]">
         <p className="tag tag-tri">{formatDate(post?._createdAt)}</p>
-        {post?.title && typeof post.title === "string" ? (
-          <h1 className="heading">{post.title}</h1>
-        ) : (
-          <h1 className="heading">Untitled</h1>
-        )}
-
-        {post?.description && typeof post.description === "string" ? (
-          <p className="sub-heading !max-w-5xl">{post.description}</p>
-        ) : (
-          <p className="sub-heading !max-w-5xl">No description provided</p>
-        )}
+        <h1 className="heading">{post?.title}</h1>
+        <p className="sub-heading !max-w-5xl">{post?.description}</p>
       </section>
 
       <section className="container mx-auto">
@@ -80,13 +71,13 @@ const Page = async ({ params }: { params: { id: string } }) => {
           <hr className="divider" />
 
           {editorPosts?.length > 0 && (
-            <div className="max-w-4xl mx-auto mb-5">
-              <p className="text-30-semibold">Editor Picks</p>
+          <div className="max-w-4xl mx-auto mb-5">
+            <p className="text-30-semibold">Editor Picks</p>
 
-              <ul className="mt-7 card_grid-sm">
-                {editorPosts.map((post: StartupTypeCard, i: number) => (
-                  <StartUpCard key={i} post={post} />
-                ))}
+            <ul className="mt-7 card_grid-sm">
+              {editorPosts.map((post: StartupTypeCard, i: number) => (
+                <StartUpCard key={i} post={post} />
+              ))}
               </ul>
             </div>
           )}
