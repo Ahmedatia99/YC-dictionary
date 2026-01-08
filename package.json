@@ -11,10 +11,8 @@
     "prebuild": "npm run typegen",
     "typegen": "sanity schema extract --path=./sanity/extract.json && sanity typegen generate"
   },
-  "packageManager": {
-    "overrides": {
-      "react": "$react",
-      "react-dom": "$react-dom",
+  "overrides": {
+    "next-auth": {
       "next": "$next"
     }
   },
